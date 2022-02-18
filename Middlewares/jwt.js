@@ -15,11 +15,16 @@ module.exports = {
   },
 
   verifyAccessToken: (req, res, next) => {
+    console.log(req.headers["authorization"]);
     if (!req.headers["authorization"])
+    
       return res.json({ message: "Access Denied" });
     const authHeader = req.headers["authorization"];
     const bearerToken = authHeader.split(" ");
     const token = bearerToken[1];
+    if(token === "null"){
+      res.json({ message: "Access Denied" })
+    }
 
     jwt.verify(token, process.env.JWT_SECRET_KEY, (err, payload) => {
       if (err) return res.json({ message: err });

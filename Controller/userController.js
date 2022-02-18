@@ -47,7 +47,7 @@ exports.DeleteProfilePic = async (req, res) => {
 
 //New user create function
 exports.CreateUser = async (req, res) => {
-    // try {
+    try {
         console.log(req.body);
         const { name, email, phone, pass, role } = req.body
         const pic = req.file
@@ -72,15 +72,16 @@ exports.CreateUser = async (req, res) => {
             createUser.save()
             if (createUser) res.json({ success: "User added Successfully" })
         }
-    // }
-    // catch {
-    //     res.json({ msg: "user creation fail" })
-    // }
+    }
+    catch {
+        res.json({ msg: "user creation fail" })
+    }
 }
 
 //login user
 
 exports.Login = async (req, res) => {
+    console.log(req.body);
     const { email, pass } = req.body
     const authUser = await User.findOne({ email: email, pass: pass })
 
