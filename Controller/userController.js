@@ -53,7 +53,7 @@ exports.CreateUser = async (req, res) => {
         const pic = req.file
         var path = await uploadsingle(pic.path)
         fs.unlink(pic.path, () => {
-            res.send({
+            console.log({
                 status: "200",
                 responseType: "string",
                 response: "success"
