@@ -8,6 +8,7 @@ module.exports = {
         expiresIn: "1d",
       };
       jwt.sign(payload, process.env.JWT_SECRET_KEY, options, (err, token) => {
+        console.log(token);
         if (err) reject(err);
         resolve(token);
       });
@@ -17,12 +18,12 @@ module.exports = {
   verifyAccessToken: (req, res, next) => {
     console.log(req.headers["authorization"]);
     if (!req.headers["authorization"])
-    
+
       return res.json({ message: "Access Denied" });
     const authHeader = req.headers["authorization"];
     const bearerToken = authHeader.split(" ");
     const token = bearerToken[1];
-    if(token === "null"){
+    if (token === "null") {
       res.json({ message: "Access Denied" })
     }
 
